@@ -69,4 +69,55 @@ $(document).ready(function(){
     $("#stack").prepend(`<div class="row bg-success push">${stack.push(200)[0]}</div>`);
     $("#stack").prepend(`<div class="row bg-primary push">${stack.push(300)[0]}</div>`);
     $("#stack").prepend(`<div class="row bg-success push">${stack.push(400)[0]}</div>`);
+
+    $("button.btn-success").click(function(){
+    let element = $(".form-control").val();
+
+    if(element.trim() === "") {
+        return;
+    }
+
+    let result = stack.push(element);
+
+    $("#stack").prepend(`<div class="row bg-primary push">${result[0]}</div>`);
+
+    $(".form-control").val("");
+
+    });
+
+    $("button.btn-danger").click(function(){
+
+    let deleted = stack.pop();
+
+    if(deleted === undefined) {
+        return;
+    }
+
+    $("#stack .push").first().remove();
+
+    $(".popped .pop").text(deleted).show();
+
+    });
+
+    $("button.btn-warning").click(function(){
+
+    $("#stack .push").removeClass("border border-warning");
+
+    if(stack.isEmpty()) {
+        return;
+    }
+
+    $("#stack .push").first().addClass("border border-warning");
+
+    });
+
+    $("button.btn-light").click(function(){
+
+    stack.clear();
+
+    $("#stack").empty();
+
+    $(".popped .pop").empty().hide();
+
+    });
 });
